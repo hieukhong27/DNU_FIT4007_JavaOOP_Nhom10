@@ -1,19 +1,18 @@
 import java.util.Scanner;
 
-public class BacSi {
-
+public class Doctor {
     private String maBS;
     private String tenBS;
     private String chuyenKhoa;
-    private String lichTruc;
     private String sdt;
+    private int soLuotKham; // để thống kê số lượt khám
 
-    public BacSi(String maBS, String tenBS, String chuyenKhoa, String lichTruc, String sdt) {
+    public Doctor(String maBS, String tenBS, String chuyenKhoa, String sdt) {
         this.maBS = maBS;
         this.tenBS = tenBS;
         this.chuyenKhoa = chuyenKhoa;
-        this.lichTruc = lichTruc;
         this.sdt = sdt;
+        this.soLuotKham = 0;
     }
 
     // GETTER
@@ -26,11 +25,11 @@ public class BacSi {
     public String getChuyenKhoa() {
         return chuyenKhoa;
     }
-    public String getLichTruc() {
-        return lichTruc;
-    }
     public String getSdt() {
         return sdt;
+    }
+    public int getSoLuotKham() {
+        return soLuotKham;
     }
 
     // SETTER
@@ -40,26 +39,23 @@ public class BacSi {
     public void setChuyenKhoa(String chuyenKhoa) {
         this.chuyenKhoa = chuyenKhoa;
     }
-    public void setLichTruc(String lichTruc) {
-        this.lichTruc = lichTruc;
-    }
     public void setSdt(String sdt) {
         this.sdt = sdt;
     }
-
-    // Hiển thị thông tin
-    public void hienThi() {
-        System.out.println(
-                "Mã BS: " + maBS +
-                        " | Tên: " + tenBS +
-                        " | Chuyên khoa: " + chuyenKhoa +
-                        " | Lịch trực: " + lichTruc +
-                        " | SĐT: " + sdt
-        );
+    public void tangLuotKham() {
+        this.soLuotKham++;
     }
 
-    // Nhập bác sĩ (static)
-    public static BacSi nhapBacSi() {
+    // Hiển thị
+    public void hienThi() {
+        System.out.println("Mã BS: " + maBS + " | Tên: " + tenBS +
+                " | Chuyên khoa: " + chuyenKhoa +
+                " | SĐT: " + sdt +
+                " | Số lượt khám: " + soLuotKham);
+    }
+
+    // Nhập bác sĩ mới
+    public static Doctor nhapDoctor() {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Nhập mã bác sĩ: ");
@@ -71,12 +67,9 @@ public class BacSi {
         System.out.print("Nhập chuyên khoa: ");
         String ck = sc.nextLine();
 
-        System.out.print("Nhập lịch trực (ví dụ: Thứ 2-4-6): ");
-        String lt = sc.nextLine();
-
         System.out.print("Nhập số điện thoại: ");
         String sdt = sc.nextLine();
 
-        return new BacSi(ma, ten, ck, lt, sdt);
+        return new Doctor(ma, ten, ck, sdt);
     }
 }
